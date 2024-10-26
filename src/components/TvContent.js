@@ -6,7 +6,6 @@ const TvContentContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(208, 208, 208, 0.3);
-  v
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -56,8 +55,9 @@ const TvType = styled.p`
 
 const StreamingLogs = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
   gap: 15px;
+  margin-bottom: 20px;
 `;
 
 const StreamingService = styled.div`
@@ -71,6 +71,7 @@ const ServiceIcon = styled.img`
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  border-radius: 5px;
 `;
 
 const AddButton = styled.button`
@@ -85,7 +86,6 @@ const AddButton = styled.button`
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 20px;
-  flex-direction: row;
 
   &:hover {
     background-color: #00cccc;
@@ -111,20 +111,28 @@ function TvContent() {
       <TvType>Samsung Smart TV</TvType>
       <StreamingLogs>
         <StreamingService>
-          <ServiceIcon src="/images/netflix-logo.png" alt="Netflix" />
-          Netflix
+          <ServiceIcon
+            src="https://vignette2.wikia.nocookie.net/logopedia/images/b/b2/NetflixIcon2016.jpg/revision/latest/scale-to-width-down/2000?cb=20160620223003"
+            alt="Netflix"
+          />
         </StreamingService>
         <StreamingService>
-          <ServiceIcon src="/images/disney-plus-logo.png" alt="Disney+" />
-          Disney+
+          <ServiceIcon
+            src="https://static1.srcdn.com/wordpress/wp-content/uploads/2019/07/Disney-Plus-Logo.jpg"
+            alt="Disney+"
+          />
         </StreamingService>
         <StreamingService>
-          <ServiceIcon src="/images/hbo-max-logo.png" alt="HBO Max" />
-          HBO Max
+          <ServiceIcon
+            src="https://logos-marcas.com/wp-content/uploads/2022/01/HBO-Max-Emblema.jpg"
+            alt="HBO Max"
+          />
         </StreamingService>
         <StreamingService>
-          <ServiceIcon src="/images/prime-video-logo.png" alt="Prime Video" />
-          Prime Video
+          <ServiceIcon
+            src="https://yt3.ggpht.com/a-/AAuE7mApuIUDPof3J4qtVrHcgcTOF1U80erjdmZnLg=s900-mo-c-c0xffffffff-rj-k-no"
+            alt="Prime Video"
+          />
         </StreamingService>
       </StreamingLogs>
       <AddButton>

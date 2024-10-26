@@ -132,11 +132,15 @@ function AirConditioner() {
   const [isPowerOn, setIsPowerOn] = useState(true);
 
   const increaseTemperature = () => {
-    setTemperature((prev) => Math.min(prev + 1, 30));
+    if (isPowerOn) {
+      setTemperature((prev) => Math.min(prev + 1, 30));
+    }
   };
 
   const decreaseTemperature = () => {
-    setTemperature((prev) => Math.max(prev - 1, 16));
+    if (isPowerOn) {
+      setTemperature((prev) => Math.max(prev - 1, 16));
+    }
   };
 
   const togglePower = () => {
@@ -147,7 +151,7 @@ function AirConditioner() {
     <AirConditionerContainer>
       <Header>
         <div style={{ display: "flex", alignItems: "center" }}>
-          <GreenDot />
+          {isPowerOn && <GreenDot />}
           <Title>Air Conditioner</Title>
         </div>
         <PowerButton onClick={togglePower}>
@@ -155,36 +159,44 @@ function AirConditioner() {
         </PowerButton>
       </Header>
       <RoomName>Living Room</RoomName>
-      <TemperatureDisplay>{temperature}°C</TemperatureDisplay>
-      <TemperatureCurve />
-      <TemperatureControls>
-        <ControlButton onClick={decreaseTemperature}>
-          <FaMinus />
-        </ControlButton>
-        <ControlButton onClick={increaseTemperature}>
-          <FaPlus />
-        </ControlButton>
-      </TemperatureControls>
-      <ControlsRow>
-        <ControlItem>
-          <ControlIcon>
-            <FaFan />
-          </ControlIcon>
-          <ControlText>Fan Speed</ControlText>
-        </ControlItem>
-        <ControlItem>
-          <ControlIcon>
-            <FaClock />
-          </ControlIcon>
-          <ControlText>Timer</ControlText>
-        </ControlItem>
-        <ControlItem>
-          <ControlIcon>
-            <FaCog />
-          </ControlIcon>
-          <ControlText>Mode</ControlText>
-        </ControlItem>
-      </ControlsRow>
+      {isPowerOn ? (
+        <>
+          <TemperatureDisplay>{temperature}°C</TemperatureDisplay>
+          <TemperatureCurve />
+          <TemperatureControls>
+            <ControlButton onClick={decreaseTemperature}>
+              <FaMinus />
+            </ControlButton>
+            <ControlButton onClick={increaseTemperature}>
+              <FaPlus />
+            </ControlButton>
+          </TemperatureControls>
+          <ControlsRow>
+            <ControlItem>
+              <ControlIcon>
+                <FaFan />
+              </ControlIcon>
+              <ControlText>Fan Speed</ControlText>
+            </ControlItem>
+            <ControlItem>
+              <ControlIcon>
+                <FaClock />
+              </ControlIcon>
+              <ControlText>Timer</ControlText>
+            </ControlItem>
+            <ControlItem>
+              <ControlIcon>
+                <FaCog />
+              </ControlIcon>
+              <ControlText>Mode</ControlText>
+            </ControlItem>
+          </ControlsRow>
+        </>
+      ) : (
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <p>The air conditioner is off.</p>
+        </div>
+      )}
     </AirConditionerContainer>
   );
 }

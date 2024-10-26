@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaCalendarAlt, FaSearch, FaTimesCircle } from "react-icons/fa";
 import { IoSettingsSharp, IoClose } from "react-icons/io5";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
-import Security from "../components/Security"; // Import the Security component
+import Security from "../components/Security";
 import Analysis from "../components/Analysis";
 import Assistant from "../components/Assistant";
 import CameraPage from "../components/CameraPage";
@@ -13,7 +13,6 @@ import TvContent from "../components/TvContent";
 import AmbientPage from "../components/AmbientPage";
 import SmartHome from "../components/SmartHome";
 
-// Styled components
 const OuterContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -23,6 +22,7 @@ const OuterContainer = styled.div`
   padding: 10px;
   position: relative;
   z-index: 0;
+  overflow-y: auto;
 `;
 
 const NavContainer = styled.div`
@@ -32,12 +32,30 @@ const NavContainer = styled.div`
   align-items: center;
   width: 70px;
   height: 32vh;
-  background-color: rgba(208, 208, 208, 0.3);
+  background-color: rgba(208, 208, 208, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
   padding: 10px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   margin-right: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin-right: 0;
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
 `;
+
 const BottomNavContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -55,6 +73,17 @@ const BottomNavContainer = styled.div`
   margin-left: 20rem;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 73px;
+    margin-left: 0;
+    border-radius: 0;
+    justify-content: space-around;
+  }
 `;
 
 const NavContentContainer = styled.div`
@@ -71,6 +100,7 @@ const NavContentContainer = styled.div`
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 `;
+
 const MenuItem = styled.div`
   display: flex;
   align-items: center;
@@ -92,6 +122,9 @@ const MenuItem = styled.div`
     background-color: rgba(0, 255, 255, 0.1);
     color: #00ffff;
   }
+  @media (max-width: 768px) {
+    padding: 10px 30px;
+  }
 `;
 
 const NavIcon = styled.div`
@@ -112,6 +145,11 @@ const NavIcon = styled.div`
     transform: scale(1.1);
     border-color: #00ffff;
   }
+
+  @media (max-width: 768px) {
+    padding: 10px 10px;
+    font-size: ${({ active }) => (active ? "45px" : "25px")};
+  }
 `;
 
 const ContentContainer = styled.div`
@@ -126,6 +164,17 @@ const ContentContainer = styled.div`
   margin-top: -1rem;
   z-index: 1;
   position: relative;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 100%;
+    padding: 8px;
+    height: 230vh;
+    overflow-y: auto;
+    margin-top: 96rem;
+    position: absolute;
+    margin-bottom: 10rem;
+  }
 `;
 
 const LeftColumn = styled.div`
@@ -133,6 +182,11 @@ const LeftColumn = styled.div`
   flex-direction: column;
   width: 30%;
   margin-right: 10px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    margin-right: 0;
+  }
 `;
 
 const TopLeftContainer = styled.div`
@@ -140,18 +194,32 @@ const TopLeftContainer = styled.div`
   margin-bottom: 10px;
   border-radius: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const BottomLeftContainer = styled.div`
   height: 50%;
   border-radius: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const RightColumn = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const TopRightContainer = styled.div`
@@ -159,11 +227,22 @@ const TopRightContainer = styled.div`
   margin-bottom: 10px;
   border-radius: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const BottomRightContainer = styled.div`
   height: 50%;
   display: flex;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
 `;
 
 const BottomRightColumn = styled.div`
@@ -174,6 +253,12 @@ const BottomRightColumn = styled.div`
   height: 21.5vh;
   margin-right: 10px;
   &:last-child {
+    margin-right: 0;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
     margin-right: 0;
   }
 `;
@@ -187,15 +272,24 @@ const BottomRightSmallContainer = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const BottomRightFullContainer = styled.div`
   flex: 1;
   border-radius: 30px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
-// Add these new components for the search bar
 const SearchBarContainer = styled.div`
   position: absolute;
   top: 10px;
@@ -212,6 +306,11 @@ const SearchBarContainer = styled.div`
   -webkit-backdrop-filter: blur(10px);
   padding: 10px;
   transition: all 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 90%;
+    top: 90px;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -246,7 +345,6 @@ const SearchIcon = styled(FaSearch)`
   font-size: 10px;
 `;
 
-// Add this new component for a single column layout
 const SingleColumnContainer = styled.div`
   flex: 1;
   width: 100%;
@@ -257,7 +355,6 @@ const SingleColumnContainer = styled.div`
   position: relative;
 `;
 
-// Add these new components for drop-up containers
 const DropUpContainer = styled.div`
   position: absolute;
   top: 5.5%;
@@ -325,7 +422,6 @@ const DropUpContent = styled.div`
   }
 `;
 
-// Add a new component for search results
 const SearchResultsContainer = styled.div`
   position: absolute;
   top: 60px;
@@ -464,7 +560,6 @@ function Main() {
     setSearchQuery("");
   };
 
-  // Mock search results (replace with actual search logic later)
   const searchResults = [
     {
       title: "Front Door Camera",
@@ -551,7 +646,7 @@ function Main() {
       case "security":
         return (
           <SingleColumnContainer>
-            <Security /> {/* Render the Security component */}
+            <Security />
           </SingleColumnContainer>
         );
       case "analysis":
